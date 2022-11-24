@@ -2,30 +2,29 @@
 const express = require("express");
 const mongoose = require("mongoose");
 
-// //IMPORT FROM OTHER FILES
 const authRouter = require("./routes/auth");
 
-// //INIT
-const PORT = 3000;
-const app = express();
 
-//MIDDLEWARE
-// CLIENT -> MIDELWARE ->  SERVER -> CLIENT
+
+// INIT
+const PORT = process.env.PORT || 3000;
+const app = express();
+const DB = "mongodb://127.0.0.1:27017/user";
+
+// middleware
 app.use(express.json());
 app.use(authRouter);
 
-// connections
+// Connections
+mongoose
+  .connect(DB)
+  .then(() => {
+    console.log("Connection Successful");
+  })
+  .catch((e) => {
+    console.log(e);
+  });
 
-mongoose.connect("mongodb://127.0.0.1:27017/user", (err, res) => {
-  if (!err) {
-    console.log("success");
-  }
-});
-
-app.get("/", (req, res) => {
-  res.send("ldjfldsf");
-});
-
-app.listen(PORT, "192.168.0.101", () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log(`connected at port ${PORT}`);
 });

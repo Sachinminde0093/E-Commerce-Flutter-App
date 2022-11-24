@@ -1,8 +1,11 @@
+import 'dart:convert';
+
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/custome_TextField.dart';
 import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 enum Auth {
   signin,
@@ -41,6 +44,13 @@ class _AuthScreenState extends State<AuthScreen> {
         email: _emailController.text,
         password: _passwordController.text,
         name: _nameController.text);
+  }
+
+  void signInUser() {
+    authService.signInUser(
+        context: context,
+        email: _emailController.text,
+        password: _passwordController.text);
   }
 
   @override
@@ -101,12 +111,9 @@ class _AuthScreenState extends State<AuthScreen> {
                       height: 10,
                     ),
                     CustomButton(
-                        text: 'Sign up',
+                        text: 'Sign in',
                         onTap: () {
-                          if (_signUpFormKey.currentState!.validate()) {
-                            signUpUser();
-                          }
-                          ;
+                          signUpUser();
                         })
                   ]),
                 ),
@@ -146,7 +153,12 @@ class _AuthScreenState extends State<AuthScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    CustomButton(text: 'Sign In', onTap: () {})
+                    CustomButton(
+                        text: 'Sign In',
+                        onTap: () {
+                          print("object");
+                          signInUser();
+                        })
                   ]),
                 ),
               ),

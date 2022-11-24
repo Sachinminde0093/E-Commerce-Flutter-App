@@ -41,12 +41,12 @@ class HomePage extends StatelessWidget {
       body: Center(
         child: Column(
           children: [
-            Text("E-Commerce App"),
+            const Text("E-Commerce App"),
             ElevatedButton(
                 onPressed: () {
                   Navigator.pushNamed(context, AuthScreen.routeName);
                 },
-                child: Text("button"))
+                child: const Text("button"))
           ],
         ),
       ),
