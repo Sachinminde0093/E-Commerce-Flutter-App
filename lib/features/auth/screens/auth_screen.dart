@@ -1,11 +1,8 @@
-import 'dart:convert';
-
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/custome_TextField.dart';
 import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 
 enum Auth {
   signin,
@@ -23,9 +20,12 @@ class AuthScreen extends StatefulWidget {
 
 class _AuthScreenState extends State<AuthScreen> {
   Auth _auth = Auth.signup;
+
   final _signUpFormKey = GlobalKey<FormState>();
   final _signInFormKey = GlobalKey<FormState>();
+
   final AuthService authService = AuthService();
+
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
@@ -47,6 +47,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signInUser() {
+    authService.getUser(context);
     authService.signInUser(
         context: context,
         email: _emailController.text,
@@ -113,6 +114,7 @@ class _AuthScreenState extends State<AuthScreen> {
                     CustomButton(
                         text: 'Sign in',
                         onTap: () {
+                        
                           signUpUser();
                         })
                   ]),
@@ -141,7 +143,7 @@ class _AuthScreenState extends State<AuthScreen> {
                 padding: const EdgeInsets.all(10.0),
                 color: GlobalVariables.backgroundColor,
                 child: Form(
-                  key: _signUpFormKey,
+                  key: _signInFormKey,
                   child: Column(children: [
                     CustomeTextField(
                         controller: _emailController, hint: 'Email'),

@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/utils.dart';
+import 'package:e_commerce_app/features/home/home_screen.dart';
+import 'package:e_commerce_app/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -49,7 +51,7 @@ class AuthService {
       {required BuildContext context,
       required String email,
       required String password}) async {
-    print(email + password);
+    // print(email + password);
     try {
       http.Response res = await http.post(Uri.parse("$uri/api/signin"),
           body: jsonEncode({'email': email, 'password': password}),
@@ -57,16 +59,63 @@ class AuthService {
             'Content-type': 'application/json; charset=UTF-8'
           });
 
-      print(res.body.toString());
+      // print(res.body.toString());
 
       httpErrorHandle(
           response: res,
           context: context,
           onSuccess: () async {
-            showSnackBar(context, "user login successful");
+            SharedPreferences prefs = await SharedPreferences.getInstance();
+
+            Provider.of<UserProvider>(context, listen: false).setUser(res.body);
+
+            await prefs.setString("auth-token", jsonDecode(res.body)['token']);
+
+            // ignore: use_build_context_synchronously
+            Navigator.pushNamedAndRemoveUntil(
+              context,
+              HomeScreen.routeName,
+              (route) => false,
+            );
+
+            // showSnackBar(context, "user login successful");
           });
     } catch (e) {
       showSnackBar(context, e.toString() + "error");
+    }
+  }
+
+  void getUser(BuildContext context) async {
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      String? token = prefs.getString("auth-token");
+
+      if (token == null) {
+        prefs.setString("auth-token", '');
+      }
+
+      var tokenres = await http.post(Uri.parse("$uri/tokenisvalid"),
+          headers: <String, String>{
+            'Conteent-type': 'application/json; charset=UTF-8',
+            'auth-token': token!
+          });
+
+      var isvalid = jsonDecode(tokenres.body);
+
+      if (isvalid == true) {
+        http.Response userRes = await http.get(Uri.parse("$uri/"),
+            headers: <String, String>{
+              'Content-type': 'application/json; charset=UTF-8',
+              'auth-token': token
+            });
+
+        var userProvider = Provider.of<UserProvider>(context, listen: false);
+        userProvider.setUser(userRes.body);
+        print(userProvider.user.email);
+      }
+    } catch (e) {
+      showSnackBar(context, e.toString());
     }
   }
 }

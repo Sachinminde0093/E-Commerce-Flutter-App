@@ -3,10 +3,7 @@ const User = require("../models/user");
 const bcryptjs = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const authRouter = express.Router();
-
-const JWT_SECRET_KEY = "gfg_jwt_secret_key";
-
-const TOKEN_HEADER_KEY = "gfg_token_header_key";
+const auth = require("../middlware/auth");
 
 // SIGN UP
 authRouter.post("/api/signup", async (req, res) => {
@@ -63,12 +60,10 @@ authRouter.post("/api/signin", async (req, res) => {
 
     let data = {
       id: user._id,
-      name: user.name,
       time: Date(),
-      type: user.type,
     };
 
-    const token = jwt.sign(data, JWT_SECRET_KEY);
+    const token = jwt.sign(data, "passwordKey");
 
     res.json({ token, ...user._doc });
   } catch (e) {
@@ -76,6 +71,36 @@ authRouter.post("/api/signin", async (req, res) => {
   }
 });
 
+authRouter.post("/tokenisvalid", async (req, res) => {
+  try {
+    // console.log(JSON.stringify(req.headers));
 
+    var token = req.headers["auth-token"];
+
+    if (!token) {
+      return res.json(false);
+    }
+
+    const verified = jwt.verify(token, "passwordKey");
+
+    if (!verified) return res.json(false);
+
+    const user = User.findById(verified.id);
+
+    if (!user) return res.json(false);
+
+    console.log("token verrified succesfuly");
+    res.json(true);
+  } catch (e) {
+    return res.status(500).json({ error: e.message });
+  }
+});
+
+authRouter.get("/", auth, async (req, res) => {
+  var user = await User.findById(req.user);
+
+  console.log("Data get succesfully");
+  res.send({ ...user._doc, token: req.token });
+});
 
 module.exports = authRouter;

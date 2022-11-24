@@ -1,14 +1,34 @@
 import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
+import 'package:e_commerce_app/features/auth/services/auth_service.dart';
+import 'package:e_commerce_app/features/home/home_screen.dart';
+import 'package:e_commerce_app/provider/userProvider.dart';
 import 'package:e_commerce_app/router.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'constants/globalvariables.dart';
 
 void main(List<String> args) {
-  runApp(EcommerceApp());
+  runApp(MultiProvider(providers: [
+    ChangeNotifierProvider(create: ((context) => UserProvider()))
+  ], child: EcommerceApp()));
 }
 
-class EcommerceApp extends StatelessWidget {
+class EcommerceApp extends StatefulWidget {
+  @override
+  State<EcommerceApp> createState() => _EcommerceAppState();
+}
+
+class _EcommerceAppState extends State<EcommerceApp> {
+  AuthService authService = AuthService();
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    authService.getUser(context);
+  }
+
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
@@ -24,32 +44,9 @@ class EcommerceApp extends StatelessWidget {
             )),
       ),
       onGenerateRoute: ((settings) => generateRoute(settings)),
-      home: const AuthScreen(),
-    );
-  }
-}
-
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("E-Commerce App"),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            const Text("E-Commerce App"),
-            ElevatedButton(
-                onPressed: () {
-                  Navigator.pushNamed(context, AuthScreen.routeName);
-                },
-                child: const Text("button"))
-          ],
-        ),
-      ),
+      home: Provider.of<UserProvider>(context).user.token.isNotEmpty
+          ? HomeScreen()
+          : const AuthScreen(),
     );
   }
 }
