@@ -39,6 +39,7 @@ class _AuthScreenState extends State<AuthScreen> {
   }
 
   void signUpUser() {
+    print("Sign up user");
     authService.signUpUser(
         context: context,
         email: _emailController.text,
@@ -114,7 +115,8 @@ class _AuthScreenState extends State<AuthScreen> {
                     CustomButton(
                         text: 'Sign in',
                         onTap: () {
-                        
+                          _signUpFormKey.currentState!.validate();
+                          print("tap on signup");
                           signUpUser();
                         })
                   ]),
@@ -159,6 +161,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         text: 'Sign In',
                         onTap: () {
                           print("object");
+                          _signInFormKey.currentState!.validate();
                           signInUser();
                         })
                   ]),

@@ -8,6 +8,7 @@ const auth = require("../middlware/auth");
 // SIGN UP
 authRouter.post("/api/signup", async (req, res) => {
   try {
+    console.log("sign up api");
     const { name, email, password } = req.body;
 
     // console.log(name, email, password);
@@ -35,6 +36,7 @@ authRouter.post("/api/signup", async (req, res) => {
 
 authRouter.post("/api/signin", async (req, res) => {
   try {
+    console.log("sign in upi");
     const { email, password } = req.body;
 
     console.log(email, password);
@@ -73,6 +75,7 @@ authRouter.post("/api/signin", async (req, res) => {
 
 authRouter.post("/tokenisvalid", async (req, res) => {
   try {
+    console.log("Token is valid");
     // console.log(JSON.stringify(req.headers));
 
     var token = req.headers["auth-token"];
@@ -97,6 +100,8 @@ authRouter.post("/tokenisvalid", async (req, res) => {
 });
 
 authRouter.get("/", auth, async (req, res) => {
+  console.log("get User");
+
   var user = await User.findById(req.user);
 
   console.log("Data get succesfully");

@@ -1,6 +1,7 @@
+import 'package:e_commerce_app/features/admin/screens/adminscreen.dart';
 import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
 import 'package:e_commerce_app/features/auth/services/auth_service.dart';
-import 'package:e_commerce_app/features/home/home_screen.dart';
+import 'package:e_commerce_app/common/widgets/botom_bar.dart';
 import 'package:e_commerce_app/provider/userProvider.dart';
 import 'package:e_commerce_app/router.dart';
 import 'package:flutter/material.dart';
@@ -23,9 +24,7 @@ class _EcommerceAppState extends State<EcommerceApp> {
   AuthService authService = AuthService();
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-
     authService.getUser(context);
   }
 
@@ -45,7 +44,9 @@ class _EcommerceAppState extends State<EcommerceApp> {
       ),
       onGenerateRoute: ((settings) => generateRoute(settings)),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? HomeScreen()
+          ? Provider.of<UserProvider>(context).user.type == "user"
+              ? const BottomBar()
+              : AdminScreen()
           : const AuthScreen(),
     );
   }

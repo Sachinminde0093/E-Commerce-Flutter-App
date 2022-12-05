@@ -1,7 +1,8 @@
 import 'dart:convert';
+import 'package:e_commerce_app/common/widgets/botom_bar.dart';
 import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/utils.dart';
-import 'package:e_commerce_app/features/home/home_screen.dart';
+import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:e_commerce_app/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
@@ -27,6 +28,8 @@ class AuthService {
         type: '',
         token: '',
       );
+
+      print(email);
 
       http.Response res = await http.post(
         Uri.parse("$uri/api/signup"),
@@ -71,7 +74,16 @@ class AuthService {
 
             await prefs.setString("auth-token", jsonDecode(res.body)['token']);
 
+            final type = Provider.of<UserProvider>(context).user.type;
             // ignore: use_build_context_synchronously
+
+            // (type == "user")
+            //     ? Navigator.pushNamedAndRemoveUntil(
+            //         context,
+            //         BottomBar.routeName,
+            //         (route) => false,
+            //       )
+            //     :
             Navigator.pushNamedAndRemoveUntil(
               context,
               HomeScreen.routeName,
@@ -93,12 +105,13 @@ class AuthService {
 
       if (token == null) {
         prefs.setString("auth-token", '');
+        return;
       }
 
       var tokenres = await http.post(Uri.parse("$uri/tokenisvalid"),
           headers: <String, String>{
             'Conteent-type': 'application/json; charset=UTF-8',
-            'auth-token': token!
+            'auth-token': token
           });
 
       var isvalid = jsonDecode(tokenres.body);
