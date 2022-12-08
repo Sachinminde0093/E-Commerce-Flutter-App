@@ -1,5 +1,6 @@
 import 'package:e_commerce_app/common/widgets/botom_bar.dart';
 import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
+import 'package:e_commerce_app/features/admin/screens/adminscreen.dart';
 import 'package:e_commerce_app/features/admin/screens/posts_screen.dart';
 import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
@@ -25,6 +26,9 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
     case AddProduct.routeName:
       return MaterialPageRoute(
           builder: (_) => AddProduct(), settings: routeSettings);
+    case AdminScreen.routeName:
+      return MaterialPageRoute(
+          builder: (_) => AdminScreen(), settings: routeSettings);
 
     default:
       return MaterialPageRoute(

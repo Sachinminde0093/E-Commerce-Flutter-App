@@ -5,8 +5,11 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/custome_textfield.dart';
 import 'package:e_commerce_app/constants/utils.dart';
-import 'package:e_commerce_app/features/home/widgets/crouseimage.dart';
+import 'package:e_commerce_app/features/admin/screens/adminscreen.dart';
+import 'package:e_commerce_app/features/admin/services/adminservices.dart';
 import 'package:flutter/material.dart';
+
+AdminServices adminServices = AdminServices();
 
 class AddProduct extends StatefulWidget {
   static const routeName = "./AddProduct";
@@ -14,13 +17,15 @@ class AddProduct extends StatefulWidget {
   State<AddProduct> createState() => _AddProductState();
 }
 
-List<File>? images = [];
+List<File> images = [];
 
 class _AddProductState extends State<AddProduct> {
   final TextEditingController _productnamecontroller = TextEditingController();
   final TextEditingController _pricecontroller = TextEditingController();
   final TextEditingController _descriptioncontroller = TextEditingController();
   final TextEditingController _quantitycontroller = TextEditingController();
+
+  final _formkey = GlobalKey<FormState>();
 
   List<String> categoriesList = [
     'Mobile',
@@ -35,7 +40,7 @@ class _AddProductState extends State<AddProduct> {
   void selectImages() async {
     var res = await picImages();
     setState(() {
-      images = res;
+      images = res ?? [];
     });
   }
 
@@ -46,6 +51,19 @@ class _AddProductState extends State<AddProduct> {
     _pricecontroller;
     _productnamecontroller;
     _quantitycontroller;
+  }
+
+  void sellProducts() {
+    if (_formkey.currentState!.validate() && images.isNotEmpty) {
+      adminServices.sellProduct(
+          context: context,
+          name: _productnamecontroller.text,
+          description: _descriptioncontroller.text,
+          price: double.parse(_pricecontroller.text),
+          quantity: double.parse(_quantitycontroller.text),
+          category: category,
+          images: images);
+    }
   }
 
   @override
@@ -59,6 +77,7 @@ class _AddProductState extends State<AddProduct> {
       ),
       body: SingleChildScrollView(
         child: Form(
+          key: _formkey,
           child: Padding(
             padding: const EdgeInsets.symmetric(
               horizontal: 10.0,
@@ -72,27 +91,27 @@ class _AddProductState extends State<AddProduct> {
                   onTap: () {
                     selectImages();
                   },
-                  child: (images!.isNotEmpty)
+                  child: (images.isNotEmpty)
                       ? CarouselSlider(
                           options: CarouselOptions(
                             height: 200,
-                            aspectRatio: 16 / 9,
-                            viewportFraction: 0.8,
+                            // aspectRatio: 16 / 9,
+                            // viewportFraction: 0.8,
                             initialPage: 0,
-                            enableInfiniteScroll: true,
+                            // enableInfiniteScroll: true,
                             reverse: false,
                             autoPlay: true,
-                            autoPlayInterval: const Duration(seconds: 3),
+                            autoPlayInterval: const Duration(seconds: 2),
                             autoPlayAnimationDuration:
                                 const Duration(milliseconds: 800),
                             autoPlayCurve: Curves.fastOutSlowIn,
-                            enlargeCenterPage: true,
+                            // enlargeCenterPage: true,
                             scrollDirection: Axis.horizontal,
                           ),
-                          items: images!.map((i) {
+                          items: images.map((i) {
                             return Builder(
                               builder: (BuildContext context) {
-                                return Container(
+                                return SizedBox(
                                   width: MediaQuery.of(context).size.width,
                                   child: Image.file(
                                     i,
@@ -174,7 +193,11 @@ class _AddProductState extends State<AddProduct> {
                 const SizedBox(
                   height: 30,
                 ),
-                CustomButton(text: "Sell", onTap: (() {})),
+                CustomButton(
+                    text: "Sell",
+                    onTap: (() {
+                      sellProducts();
+                    })),
               ],
             ),
           ),

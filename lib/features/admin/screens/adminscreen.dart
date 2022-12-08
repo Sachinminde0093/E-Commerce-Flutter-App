@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class AdminScreen extends StatefulWidget {
+  static const routeName = "./AdminScreen";
   @override
   State<AdminScreen> createState() => _AdminScreenState();
 }
@@ -13,8 +14,7 @@ class _AdminScreenState extends State<AdminScreen> {
   List<Widget> tabs = [
     Center(child: Text("S1")),
     Center(child: Text("S2")),
-   const PostScreen()
-    
+    const PostScreen()
   ];
 
   List<BottomNavigationBarItem> bottomBarItem = [

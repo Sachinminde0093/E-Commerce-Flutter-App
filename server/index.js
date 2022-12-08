@@ -3,8 +3,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 
 const authRouter = require("./routes/auth");
-
-
+const adminRouter = require("./routes/admin");
 
 // INIT
 const PORT = process.env.PORT || 3000;
@@ -14,6 +13,7 @@ const DB = "mongodb://127.0.0.1:27017/user";
 // middleware
 app.use(express.json());
 app.use(authRouter);
+app.use(adminRouter);
 
 // Connections
 mongoose

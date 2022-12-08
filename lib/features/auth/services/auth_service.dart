@@ -70,6 +70,7 @@ class AuthService {
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
+            // ignore: use_build_context_synchronously
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
 
             await prefs.setString("auth-token", jsonDecode(res.body)['token']);

@@ -116,7 +116,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         text: 'Sign in',
                         onTap: () {
                           _signUpFormKey.currentState!.validate();
-                          print("tap on signup");
+                         
                           signUpUser();
                         })
                   ]),

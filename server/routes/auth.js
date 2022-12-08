@@ -100,7 +100,7 @@ authRouter.post("/tokenisvalid", async (req, res) => {
 });
 
 authRouter.get("/", auth, async (req, res) => {
-  console.log("get User");
+  // console.log("get User");
 
   var user = await User.findById(req.user);
 

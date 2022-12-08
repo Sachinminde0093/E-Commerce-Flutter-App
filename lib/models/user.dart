@@ -33,7 +33,7 @@ class User {
 
   factory User.fromMap(Map<String, dynamic> map) {
     return User(
-      id: map['_id'] ?? '',
+      id: map[''] ?? '',
       name: map['name'] ?? '',
       email: map['email'] ?? '',
       password: map['password'] ?? '',
@@ -67,4 +67,8 @@ class User {
       token: token ?? this.token,
     );
   }
+
+
+
+
 }
