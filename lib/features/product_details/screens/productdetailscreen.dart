@@ -2,7 +2,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/stars.dart';
 import 'package:e_commerce_app/constants/globalvariables.dart';
-import 'package:e_commerce_app/features/product_details/services/rateproduct.dart';
+import 'package:e_commerce_app/features/product_details/services/productservice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 
@@ -51,6 +51,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     setState(() {
       myRating = rating;
     });
+  }
+
+  void addTocart() {
+    productServices.addToCart(product!.id!, context);
   }
 
   @override
@@ -114,7 +118,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               const SizedBox(
                 height: 10,
               ),
-              CustomButton(text: "Add To Cart", onTap: () {}),
+              CustomButton(
+                  text: "Add To Cart",
+                  onTap: () {
+                    addTocart();
+                  }),
               Container(
                 color: Colors.black12,
                 height: 5,

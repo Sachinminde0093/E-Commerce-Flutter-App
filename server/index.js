@@ -6,6 +6,7 @@ const authRouter = require("./routes/auth");
 const adminRouter = require("./routes/admin");
 const produtRouter = require("./routes/product");
 const searchRouter = require("./routes/search");
+const userRouter = require("./routes/user");
 
 // INIT
 const PORT = process.env.PORT || 3000;
@@ -18,6 +19,7 @@ app.use(authRouter);
 app.use(adminRouter);
 app.use(produtRouter);
 app.use(searchRouter);
+app.use(userRouter);
 
 // Connections
 mongoose
