@@ -1,15 +1,9 @@
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:flutter/material.dart';
 
 class CarouselImage extends StatelessWidget {
-  List<dynamic> list = [
-    "https://animeshka.org/uploads/posts/2022-06/thumbs/1654548601_14-animeshka-org-p-macromir-krasivo-15.jpg",
-    "https://animeshka.org/uploads/posts/2022-06/thumbs/1654548601_14-animeshka-org-p-macromir-krasivo-15.jpg",
-    "https://animeshka.org/uploads/posts/2022-06/thumbs/1654548601_14-animeshka-org-p-macromir-krasivo-15.jpg",
-    "https://animeshka.org/uploads/posts/2022-06/thumbs/1654548601_14-animeshka-org-p-macromir-krasivo-15.jpg",
-    "https://animeshka.org/uploads/posts/2022-06/thumbs/1654548601_14-animeshka-org-p-macromir-krasivo-15.jpg",
-    "https://animeshka.org/uploads/posts/2022-06/thumbs/1654548601_14-animeshka-org-p-macromir-krasivo-15.jpg",
-  ];
+  List<String> list = GlobalVariables.carouselImages;
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(

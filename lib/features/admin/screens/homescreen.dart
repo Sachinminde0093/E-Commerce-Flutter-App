@@ -1,18 +1,15 @@
-import 'package:e_commerce_app/common/widgets/loader.dart';
-import 'package:e_commerce_app/models/products.dart';
-import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
 import 'package:flutter/material.dart';
 
-class PostScreen extends StatefulWidget {
-  static const routeName = "./PostScreen";
+import '../../../common/widgets/loader.dart';
+import '../../../models/products.dart';
+import 'add_product_screen.dart';
 
-  const PostScreen({super.key});
-
+class HomeScreen extends StatefulWidget {
   @override
-  State<PostScreen> createState() => _PostScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> {
+class _HomeScreenState extends State<HomeScreen> {
   List<Product>? productList;
 
   @override

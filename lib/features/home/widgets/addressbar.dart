@@ -8,7 +8,7 @@ class AddressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
-    final location = "location";
+    const location = "location";
     return Container(
       height: 40,
       decoration: const BoxDecoration(

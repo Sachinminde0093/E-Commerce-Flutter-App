@@ -28,11 +28,11 @@ class _AddProductState extends State<AddProduct> {
   final _formkey = GlobalKey<FormState>();
 
   List<String> categoriesList = [
-    'Mobile',
+    'Mobiles',
     'Essentials',
     'Appliences',
-    'Book',
-    'Fashion'
+    'Books',
+    'Fashions'
   ];
 
   String category = "Mobile";

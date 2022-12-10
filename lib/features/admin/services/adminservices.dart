@@ -12,7 +12,7 @@ import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../models/products.dart';
+import '../../../models/products.dart';
 
 class AdminServices {
   final provider = UserProvider();
@@ -75,12 +75,15 @@ class AdminServices {
   Future<List<Product>> fetchAllProduct(BuildContext context) async {
     List<Product> productList = [];
 
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-
-    String? token = prefs.getString('auth-token');
-
-    debugPrint(token);
+    
     try {
+
+SharedPreferences prefs = await SharedPreferences.getInstance();
+
+      String? token = prefs.getString('auth-token');
+
+      debugPrint(token);
+      
       http.Response res =
           await http.get(Uri.parse("$uri/admin/get-product"), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
