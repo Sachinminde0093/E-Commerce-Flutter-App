@@ -27,6 +27,8 @@ class SearchService {
         },
       );
 
+      debugPrint(res.body);
+
       httpErrorHandle(
           response: res,
           context: context,
@@ -40,7 +42,7 @@ class SearchService {
             }
           });
     } catch (err) {
-      showSnackBar(context, "error1:$err");
+      showSnackBar(context, "searchService:$err");
     }
 
     debugPrint(products.length.toString());

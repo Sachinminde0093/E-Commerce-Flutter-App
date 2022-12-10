@@ -3,7 +3,7 @@ import 'package:e_commerce_app/common/widgets/botom_bar.dart';
 import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
-import 'package:e_commerce_app/provider/userProvider.dart';
+import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';

@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("../middlware/auth");
 const Product = require("../models/product");
+
 const ratingSchema = require("../models/rating");
 const productRouter = express.Router();
 
@@ -22,7 +23,9 @@ productRouter.get("/api/demo", (req, res) => {
 productRouter.post("/api/rate-product", auth, async (req, res) => {
   try {
     const { id, rating } = req.body;
+    console.log(req.body);
     let product = await Product.findById(id);
+    console.log(product);
 
     for (let i = 0; i < product.ratings.length; i++) {
       if (product.ratings[i].userId == req.user) {
@@ -36,10 +39,12 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
     };
 
     product.ratings.push(ratingSchema);
+
     console.log(product);
-    product = await product.save();
-    res.json(product);
-    
+
+    var prod = await product.save();
+
+    res.json(prod);
   } catch (e) {
     res.status(500).json({ error: e.message });
   }

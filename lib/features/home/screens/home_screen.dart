@@ -5,7 +5,7 @@ import 'package:e_commerce_app/features/home/widgets/addressbar.dart';
 import 'package:e_commerce_app/features/home/widgets/crouselimage.dart';
 import 'package:e_commerce_app/features/home/widgets/dealoftheday.dart';
 import 'package:e_commerce_app/features/home/widgets/topcategories.dart';
-import 'package:e_commerce_app/provider/userProvider.dart';
+import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

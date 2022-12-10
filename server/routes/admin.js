@@ -1,8 +1,8 @@
 const express = require("express");
 const { model, models } = require("mongoose");
-const Product = require("../models/product");
 
 const admin = require("../middlware/admin");
+const { Product } = require("../models/product");
 const User = require("../models/user");
 
 const adminRouter = express.Router();
@@ -39,7 +39,7 @@ adminRouter.get("/admin/get-product", admin, async (req, res) => {
 adminRouter.post("/admin/delete-product", admin, async (req, res) => {
   try {
     const { id } = req.body;
-  
+
     var product = await Product.findByIdAndDelete({ _id: id });
 
     res.json(product);
@@ -51,7 +51,5 @@ adminRouter.post("/admin/delete-product", admin, async (req, res) => {
 adminRouter.post("/admin/api", admin, (req, res) => {
   res.send("sss");
 });
-
-
 
 module.exports = adminRouter;

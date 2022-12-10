@@ -1,6 +1,7 @@
 const express = require("express");
 const auth = require("../middlware/auth");
 const Product = require("../models/product");
+
 const searchRouter = express.Router();
 
 searchRouter.get("/api/search/:name", auth, async (req, res) => {
@@ -11,7 +12,6 @@ searchRouter.get("/api/search/:name", auth, async (req, res) => {
     });
 
     res.json(product);
-    
   } catch (err) {
     res.status(500).json({ error: err.message });
   }

@@ -15,13 +15,13 @@ class ProductServices {
       var token = prefs.getString('auth-token');
 
       await http.post(Uri.parse("$uri/api/rate-product"),
-          body: jsonEncode({id, rating}),
+          body: jsonEncode({'id': id, 'rating': rating}),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'auth-token': token!
           });
     } catch (err) {
-      showSnackBar(context, err.toString());
+      showSnackBar(context, "rateproduct: $err");
     }
   }
 }

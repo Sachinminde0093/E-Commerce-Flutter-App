@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/provider/userProvider.dart';
+import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

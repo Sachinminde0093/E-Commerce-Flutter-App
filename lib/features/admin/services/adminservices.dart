@@ -6,7 +6,7 @@ import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/features/admin/screens/posts_screen.dart';
-import 'package:e_commerce_app/provider/userProvider.dart';
+import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloudinary_public/cloudinary_public.dart';
 import 'package:http/http.dart' as http;

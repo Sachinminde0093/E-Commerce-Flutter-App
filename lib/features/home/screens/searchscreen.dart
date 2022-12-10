@@ -1,6 +1,6 @@
 import 'package:e_commerce_app/common/widgets/loader.dart';
 import 'package:e_commerce_app/common/widgets/stars.dart';
-import 'package:e_commerce_app/features/product_details/screens/productdetailsscreen.dart';
+import 'package:e_commerce_app/features/product_details/screens/productdetailscreen.dart';
 import 'package:e_commerce_app/features/home/services/searchservice.dart';
 import 'package:e_commerce_app/models/products.dart';
 import 'package:flutter/material.dart';

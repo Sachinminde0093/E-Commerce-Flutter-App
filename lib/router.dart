@@ -5,7 +5,7 @@ import 'package:e_commerce_app/features/admin/screens/posts_screen.dart';
 import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
 import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
-import 'package:e_commerce_app/features/product_details/screens/productdetailsscreen.dart';
+import 'package:e_commerce_app/features/product_details/screens/productdetailscreen.dart';
 import 'package:e_commerce_app/features/home/screens/searchscreen.dart';
 import 'package:e_commerce_app/models/products.dart';
 import 'package:flutter/material.dart';
