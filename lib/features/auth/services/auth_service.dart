@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:e_commerce_app/common/widgets/botom_bar.dart';
+
 import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
@@ -26,7 +26,7 @@ class AuthService {
         email: email,
         address: '',
         type: '',
-        token: '',
+        token: '', cart: [],
       );
 
       print(email);

@@ -1,14 +1,17 @@
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/utils.dart';
+import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/error_handling.dart';
 import '../../../constants/globalvariables.dart';
+import '../../../models/user.dart';
 
-class ProductServices {
+class ProductDetailServices {
   void rateProduct(BuildContext context, String id, double rating) async {
     try {
       SharedPreferences prefs = await SharedPreferences.getInstance();
@@ -35,6 +38,8 @@ class ProductServices {
 
   void addToCart(final id, BuildContext context) async {
     try {
+      final userProvider = Provider.of<UserProvider>(context, listen: false);
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String? token = prefs.getString('auth-token');
@@ -51,7 +56,12 @@ class ProductServices {
           response: res,
           context: context,
           onSuccess: () {
-            debugPrint("usccess");
+            showSnackBar(context, "Product add to cart${userProvider.user}");
+            User user =
+                userProvider.user.copyWith(cart: jsonDecode(res.body)['cart']);
+            userProvider.setUserFromModel(user);
+            showSnackBar(
+                context, "Product add to cart${userProvider.user.cart}");
           });
     } catch (err) {
       showSnackBar(context, "rateproduct: $err");

@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/features/account/screen/accountscreen.dart';
+import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -16,8 +17,8 @@ class _BottomBar extends State<BottomBar> {
 
   List<Widget> tabs = [
     const HomeScreen(),
-  AccountScreen(),
-    const Center(child: Text("Cart")),
+    AccountScreen(),
+    const CartScreen(),
   ];
   @override
   Widget build(BuildContext context) {
