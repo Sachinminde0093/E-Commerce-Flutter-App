@@ -52,7 +52,7 @@ userRouter.delete("/api/remove-from-cart/:id", auth, async (req, res) => {
           if (user.cart[i].quantity == 1) {
             user.cart.splice(i, 1);
           } else {
-            user.cart[i].quantity -= 1;
+            user.cart[i].quantity -= 1; 
           }
         }
       }

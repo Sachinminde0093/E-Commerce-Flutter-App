@@ -4,12 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../common/widgets/custom_button.dart';
+import '../../address/screens/address_screen.dart';
 import '../../home/screens/searchscreen.dart';
 import '../../home/widgets/addressbar.dart';
 import '../widgets/cart_product.dart';
 import '../widgets/cart_subtotal.dart';
 
 class CartScreen extends StatefulWidget {
+  static const routeName = "/cart_screen";
   const CartScreen({super.key});
 
   @override
@@ -21,13 +23,16 @@ class _CartScreenState extends State<CartScreen> {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
-  // void navigateToAddress(int sum) {
-  //   Navigator.pushNamed(
-  //     context,
-  //     AddressScreen.routeName,
-  //     arguments: sum.toString(),
-  //   );
-  // }
+  int sum = 10;
+
+  void navigateToAddress(int sum) {
+    Navigator.pushNamed(
+      context,
+      AddressScreen.routeName,
+      arguments: sum.toString(),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().user;
@@ -114,7 +119,7 @@ class _CartScreenState extends State<CartScreen> {
               padding: const EdgeInsets.all(8.0),
               child: CustomButton(
                 text: 'Proceed to Buy ', //(${user.cart.length} items)',
-                onTap: () {}, //=> navigateToAddress(sum),
+                onTap: () => navigateToAddress(sum),
                 //color: Colors.yellow[600],
               ),
             ),

@@ -1,8 +1,11 @@
+
 import 'package:e_commerce_app/common/widgets/botom_bar.dart';
+import 'package:e_commerce_app/features/address/screens/address_screen.dart';
 import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
 import 'package:e_commerce_app/features/admin/screens/adminscreen.dart';
 import 'package:e_commerce_app/features/admin/screens/posts_screen.dart';
 import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
+import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
 import 'package:e_commerce_app/features/product_details/screens/productdetailscreen.dart';
@@ -62,6 +65,23 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
             );
           }),
           settings: routeSettings);
+
+    case AddressScreen.routeName:
+        String sum = routeSettings.arguments as String;
+      return MaterialPageRoute(
+        settings: routeSettings,
+        builder: (context) {
+          return AddressScreen(sum:sum);
+        },
+      );
+
+    case CartScreen.routeName:
+      return MaterialPageRoute(
+          builder: (context) {
+            return const CartScreen();
+          },
+          settings: routeSettings);
+
     default:
       return MaterialPageRoute(
           settings: routeSettings,
