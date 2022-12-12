@@ -8,7 +8,7 @@ class AddressBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
-    final String? location = user?.address;
+    final String location = user.address;
     return Container(
       height: 40,
       decoration: const BoxDecoration(
@@ -28,9 +28,9 @@ class AddressBar extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
                 child: Text(
-              "Deliverd to ${user.name}- ${location}",
+              "Deliverd to ${user.name}- $location",
               overflow: TextOverflow.ellipsis,
-            )),
+            ),),
             const SizedBox(width: 10),
             const Icon(Icons.expand_more)
           ],

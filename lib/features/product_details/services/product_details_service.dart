@@ -52,6 +52,7 @@ class ProductDetailServices {
             'auth-token': token!
           });
 
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
           response: res,
           context: context,

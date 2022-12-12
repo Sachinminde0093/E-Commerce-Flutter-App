@@ -1,4 +1,3 @@
-
 import 'package:e_commerce_app/common/widgets/botom_bar.dart';
 import 'package:e_commerce_app/features/address/screens/address_screen.dart';
 import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
@@ -67,11 +66,13 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
           settings: routeSettings);
 
     case AddressScreen.routeName:
-        String sum = routeSettings.arguments as String;
+      String sum = routeSettings.arguments as String;
       return MaterialPageRoute(
         settings: routeSettings,
         builder: (context) {
-          return AddressScreen(sum:sum);
+          return AddressScreen(
+            totalAmount: sum,
+          );
         },
       );
 
@@ -81,6 +82,7 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
             return const CartScreen();
           },
           settings: routeSettings);
+          
 
     default:
       return MaterialPageRoute(
