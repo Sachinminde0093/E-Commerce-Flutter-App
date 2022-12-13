@@ -4,7 +4,6 @@ import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/models/products.dart';
 import 'package:e_commerce_app/provider/userProvider.dart';
-import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
@@ -52,7 +51,8 @@ class HomeService {
   Future<Product> fetchDealOfDay({
     required BuildContext context,
   }) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    UserProvider userProvider =
+        Provider.of<UserProvider>(context, listen: false);
     Product product = Product(
       name: '',
       description: '',
@@ -81,6 +81,4 @@ class HomeService {
     }
     return product;
   }
-
-
 }
