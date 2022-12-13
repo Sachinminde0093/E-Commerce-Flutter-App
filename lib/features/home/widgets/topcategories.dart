@@ -3,38 +3,52 @@ import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart'
 import 'package:flutter/cupertino.dart';
 
 class TopCategories extends StatelessWidget {
-  const TopCategories({super.key});
+  const TopCategories({Key? key}) : super(key: key);
+
+  void navigateToCategoryPage(BuildContext context, String category) {
+    Navigator.pushNamed(context, CategoryDealsScreen.routeName,
+        arguments: category);
+  }
 
   @override
   Widget build(BuildContext context) {
-    var list = GlobalVariables.categoryImages;
-    void showCategoryproduct(String category) {
-      Navigator.pushNamed(context, CategoryDealsScreen.routeName,
-          arguments: category);
-    }
-
     return SizedBox(
       height: 60,
-      child: SizedBox(
-        height: 50,
-        child: ListView.builder(
-          scrollDirection: Axis.horizontal,
-          itemBuilder: (context, index) {
-            Map map = list[index];
-            return GestureDetector(
-              onTap: () {
-                showCategoryproduct(map["title"]);
-              },
-              child: ClipRRect(
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Image.asset(map["image"]),
+      child: ListView.builder(
+        itemCount: GlobalVariables.categoryImages.length,
+        scrollDirection: Axis.horizontal,
+        itemExtent: 75,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () => navigateToCategoryPage(
+              context,
+              GlobalVariables.categoryImages[index]['title']!,
+            ),
+            child: Column(
+              children: [
+                Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(50),
+                    child: Image.asset(
+                      GlobalVariables.categoryImages[index]['image']!,
+                      fit: BoxFit.cover,
+                      height: 40,
+                      width: 40,
+                    ),
+                  ),
                 ),
-              ),
-            );
-          },
-          itemCount: list.length,
-        ),
+                Text(
+                  GlobalVariables.categoryImages[index]['title']!,
+                  style: const TextStyle(
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+              ],
+            ),
+          );
+        },
       ),
     );
   }

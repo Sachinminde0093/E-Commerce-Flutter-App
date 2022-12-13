@@ -5,22 +5,37 @@ import 'package:provider/provider.dart';
 import '../../../constants/globalvariables.dart';
 
 class BelowAppBar extends StatelessWidget {
-  const BelowAppBar({super.key});
+  const BelowAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     final user = Provider.of<UserProvider>(context).user;
 
     return Container(
-      height: 30,
       decoration: const BoxDecoration(
         gradient: GlobalVariables.appBarGradient,
       ),
+      padding: const EdgeInsets.only(left: 10, right: 10, bottom: 10),
       child: Row(
         children: [
-          Padding(
-            padding: EdgeInsets.only(left: 10, bottom: 10, right: 10),
-            child: Text(user.name),
+          RichText(
+            text: TextSpan(
+              text: 'Hello, ',
+              style: const TextStyle(
+                fontSize: 22,
+                color: Colors.black,
+              ),
+              children: [
+                TextSpan(
+                  text: user.name,
+                  style: const TextStyle(
+                    fontSize: 22,
+                    color: Colors.black,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

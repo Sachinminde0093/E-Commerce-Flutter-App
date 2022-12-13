@@ -2,7 +2,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/stars.dart';
 import 'package:e_commerce_app/constants/globalvariables.dart';
-import 'package:e_commerce_app/features/address/screens/address_screen.dart';
 import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/product_details/services/product_details_service.dart';
 import 'package:flutter/material.dart';
@@ -119,7 +118,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               CustomButton(
                   text: "Buy Now",
                   onTap: () {
-                    Navigator.pushNamed(context,CartScreen.routeName);
+                    Navigator.pushNamed(context, CartScreen.routeName);
                   }),
               const SizedBox(
                 height: 10,

@@ -7,10 +7,14 @@ import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
 import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
+import 'package:e_commerce_app/features/order/order_detailsScreen.dart';
 import 'package:e_commerce_app/features/product_details/screens/productdetailscreen.dart';
 import 'package:e_commerce_app/features/home/screens/searchscreen.dart';
 import 'package:e_commerce_app/models/products.dart';
 import 'package:flutter/material.dart';
+
+import 'features/account/widgets/orders.dart';
+import 'models/order.dart';
 
 Route<dynamic>? generateRoute(RouteSettings routeSettings) {
   switch (routeSettings.name) {
@@ -82,7 +86,14 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
             return const CartScreen();
           },
           settings: routeSettings);
-          
+
+    case OrderDetailsScreen.routeName:
+      Order order = routeSettings.arguments as Order;
+      return MaterialPageRoute(
+          builder: (context) {
+            return OrderDetailsScreen(order: order);
+          },
+          settings: routeSettings);
 
     default:
       return MaterialPageRoute(
