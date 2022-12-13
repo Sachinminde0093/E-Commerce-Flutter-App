@@ -1,8 +1,8 @@
+import 'package:e_commerce_app/features/home/services/homeservice.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/widgets/loader.dart';
 import '../../../models/products.dart';
-import '../services/homeservice.dart';
 
 class DealOfDay extends StatefulWidget {
   const DealOfDay({Key? key}) : super(key: key);

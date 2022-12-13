@@ -1,10 +1,9 @@
 import 'package:e_commerce_app/features/account/widgets/single_product.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 import '../../../common/widgets/loader.dart';
 import '../../../constants/globalvariables.dart';
 import '../../../models/order.dart';
-import '../screen/order_details_screen.dart';
 import '../services/account_services.dart';
 
 class Orders extends StatefulWidget {
@@ -77,11 +76,11 @@ class _OrdersState extends State<Orders> {
                   itemBuilder: (context, index) {
                     return GestureDetector(
                       onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          OrderDetailScreen.routeName,
-                          arguments: orders![index],
-                        );
+                        // Navigator.pushNamed(
+                        //   context,
+                        //  O
+                        //   arguments: orders![index],
+                        // );
                       },
                       child: SingleProduct(
                         image: orders![index].products[0].images[0],
@@ -94,3 +93,5 @@ class _OrdersState extends State<Orders> {
           );
   }
 }
+
+class OrderDetailScreen {}

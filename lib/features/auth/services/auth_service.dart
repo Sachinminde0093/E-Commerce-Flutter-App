@@ -9,6 +9,7 @@ import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../../common/widgets/botom_bar.dart';
 import '../../../constants/globalvariables.dart';
 import '../../../models/user.dart';
 
@@ -26,7 +27,8 @@ class AuthService {
         email: email,
         address: '',
         type: '',
-        token: '', cart: [],
+        token: '',
+        cart: [],
       );
 
       print(email);
@@ -75,23 +77,23 @@ class AuthService {
 
             await prefs.setString("auth-token", jsonDecode(res.body)['token']);
 
-            final type = Provider.of<UserProvider>(context).user.type;
-            // ignore: use_build_context_synchronously
+            final type =
+                Provider.of<UserProvider>(context, listen: false).user.type;
+            //ignore: use_build_context_synchronously
 
-            // (type == "user")
-            //     ? Navigator.pushNamedAndRemoveUntil(
-            //         context,
-            //         BottomBar.routeName,
-            //         (route) => false,
-            //       )
-            //     :
-            Navigator.pushNamedAndRemoveUntil(
-              context,
-              HomeScreen.routeName,
-              (route) => false,
-            );
+            (type == "user")
+                ? Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    BottomBar.routeName,
+                    (route) => false,
+                  )
+                : Navigator.pushNamedAndRemoveUntil(
+                    context,
+                    HomeScreen.routeName,
+                    (route) => false,
+                  );
 
-            // showSnackBar(context, "user login successful");
+            showSnackBar(context, "user login successful");
           });
     } catch (e) {
       showSnackBar(context, e.toString() + "error");

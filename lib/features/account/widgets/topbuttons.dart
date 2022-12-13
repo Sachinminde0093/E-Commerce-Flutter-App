@@ -1,27 +1,40 @@
 import 'package:e_commerce_app/features/account/widgets/accountbutton.dart';
 import 'package:flutter/material.dart';
 
+import '../services/account_services.dart';
+
 class TopButtons extends StatelessWidget {
-  const TopButtons({super.key});
+  const TopButtons({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AccountButton(onTap: () {}, text: "Button"),
-            AccountButton(onTap: () {}, text: "Button"),
+            AccountButton(
+              text: 'Your Orders',
+              onTap: () {},
+            ),
+            AccountButton(
+              text: 'Turn Seller',
+              onTap: () {},
+            ),
           ],
         ),
+        const SizedBox(height: 10),
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
-            AccountButton(onTap: () {}, text: "Button"),
-            AccountButton(onTap: () {}, text: "Button"),
+            AccountButton(
+              text: 'Log Out',
+              onTap: () => AccountServices().logOut(context),
+            ),
+            AccountButton(
+              text: 'Your Wish List',
+              onTap: () {},
+            ),
           ],
-        )
+        ),
       ],
     );
   }

@@ -3,14 +3,27 @@ import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:flutter/material.dart';
 
 class CarouselImage extends StatelessWidget {
-  List<String> list = GlobalVariables.carouselImages;
+  const CarouselImage({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
+      items: GlobalVariables.carouselImages.map(
+        (i) {
+          return Builder(
+            builder: (BuildContext context) => Image.network(
+              i,
+              fit: BoxFit.cover,
+              height: 200,
+            ),
+          );
+        },
+      ).toList(),
       options: CarouselOptions(
+        viewportFraction: 1,
         height: 200,
         aspectRatio: 16 / 9,
-        viewportFraction: 1,
+      
         initialPage: 0,
         enableInfiniteScroll: true,
         reverse: false,
@@ -21,19 +34,6 @@ class CarouselImage extends StatelessWidget {
         enlargeCenterPage: true,
         scrollDirection: Axis.horizontal,
       ),
-      items: list.map((i) {
-        return Builder(
-          builder: (BuildContext context) {
-            return SizedBox(
-              width: MediaQuery.of(context).size.width,
-              child: Image.network(
-                i,
-                fit: BoxFit.cover,
-              ),
-            );
-          },
-        );
-      }).toList(),
     );
   }
 }

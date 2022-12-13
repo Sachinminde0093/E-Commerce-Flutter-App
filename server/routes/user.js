@@ -2,7 +2,7 @@ const express = require("express");
 const auth = require("../middlware/auth");
 const { Product } = require("../models/product");
 const User = require("../models/user");
-
+const Order = require("../models/order");
 const userRouter = express.Router();
 
 userRouter.get("/user/get", (req, res) => {

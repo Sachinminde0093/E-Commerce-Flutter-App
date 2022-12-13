@@ -9,7 +9,6 @@ import '../../../constants/error_handling.dart';
 import '../../../constants/globalvariables.dart';
 import '../../../constants/utils.dart';
 import '../../../models/order.dart';
-import '../../../provider/userProvider.dart';
 import '../../auth/screens/auth_screen.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,7 +16,7 @@ class AccountServices {
   Future<List<Order>> fetchMyOrders({
     required BuildContext context,
   }) async {
-   UserProvider userProvider = Provider.of<UserProvider>(context, listen: false);
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     List<Order> orderList = [];
     try {
       http.Response res =
@@ -44,6 +43,9 @@ class AccountServices {
     } catch (e) {
       showSnackBar(context, e.toString());
     }
+
+    debugPrint("orderList");
+    ;
     return orderList;
   }
 
