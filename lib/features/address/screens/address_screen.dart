@@ -1,9 +1,9 @@
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
 
-import '../../../common/widgets/custome_TextField.dart';
+import '../../../common/widgets/custome_textfield.dart';
 import '../../../constants/globalvariables.dart';
 import '../../../constants/utils.dart';
 import '../../../provider/userprovider.dart';
@@ -161,24 +161,24 @@ class _AddressScreenState extends State<AddressScreen> {
                 key: _addressFormKey,
                 child: Column(
                   children: [
-                    CustomeTextField(
+                    CustomTextField(
                       controller: flatBuildingController,
-                      hint: 'Flat, House no, Building',
+                      hintText: 'Flat, House no, Building',
                     ),
                     const SizedBox(height: 10),
-                    CustomeTextField(
+                    CustomTextField(
                       controller: areaController,
-                      hint: 'Area, Street',
+                      hintText: 'Area, Street',
                     ),
                     const SizedBox(height: 10),
-                    CustomeTextField(
+                    CustomTextField(
                       controller: pincodeController,
-                      hint: 'Pincode',
+                      hintText: 'Pincode',
                     ),
                     const SizedBox(height: 10),
-                    CustomeTextField(
+                    CustomTextField(
                       controller: cityController,
-                      hint: 'Town/City',
+                      hintText: 'Town/City',
                     ),
                     const SizedBox(height: 10),
                   ],

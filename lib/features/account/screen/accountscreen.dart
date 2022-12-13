@@ -1,8 +1,10 @@
 import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/features/account/widgets/belowappbar.dart';
-import 'package:e_commerce_app/features/account/widgets/orders.dart';
 import 'package:e_commerce_app/features/account/widgets/topbuttons.dart';
 import 'package:flutter/material.dart';
+
+import '../../../models/order.dart';
+import '../widgets/orders.dart';
 
 class AccountScreen extends StatefulWidget {
   @override
@@ -55,7 +57,7 @@ class _AccountScreen extends State<AccountScreen> {
       body: Column(children: [
         BelowAppBar(),
         TopButtons(),
-        Order(),
+        Orders(),
       ]),
     );
   }

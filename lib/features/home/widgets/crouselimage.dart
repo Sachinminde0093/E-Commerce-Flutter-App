@@ -10,7 +10,7 @@ class CarouselImage extends StatelessWidget {
       options: CarouselOptions(
         height: 200,
         aspectRatio: 16 / 9,
-        viewportFraction: 0.8,
+        viewportFraction: 1,
         initialPage: 0,
         enableInfiniteScroll: true,
         reverse: false,

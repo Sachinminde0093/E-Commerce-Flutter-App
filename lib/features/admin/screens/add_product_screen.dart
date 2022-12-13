@@ -5,7 +5,6 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:e_commerce_app/common/widgets/custome_textfield.dart';
 import 'package:e_commerce_app/constants/utils.dart';
-import 'package:e_commerce_app/features/admin/screens/adminscreen.dart';
 import 'package:e_commerce_app/features/admin/services/adminservices.dart';
 import 'package:flutter/material.dart';
 
@@ -151,25 +150,27 @@ class _AddProductState extends State<AddProduct> {
                 const SizedBox(
                   height: 30,
                 ),
-                CustomeTextField(
-                    controller: _productnamecontroller, hint: "Product Name"),
+                CustomTextField(
+                    controller: _productnamecontroller,
+                    hintText: "Product Name"),
                 const SizedBox(
                   height: 30,
                 ),
-                CustomeTextField(
+                CustomTextField(
                   controller: _descriptioncontroller,
-                  hint: "Description",
-                  maxline: 7,
+                  hintText: "Description",
+                  maxLines: 7,
                 ),
                 const SizedBox(
                   height: 10,
                 ),
-                CustomeTextField(controller: _pricecontroller, hint: "Price"),
+                CustomTextField(
+                    controller: _pricecontroller, hintText: "Price"),
                 const SizedBox(
                   height: 10,
                 ),
-                CustomeTextField(
-                    controller: _quantitycontroller, hint: "Quantity"),
+                CustomTextField(
+                    controller: _quantitycontroller, hintText: "Quantity"),
                 SizedBox(
                   width: double.infinity,
                   child: Padding(

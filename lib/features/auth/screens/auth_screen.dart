@@ -1,8 +1,10 @@
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
-import 'package:e_commerce_app/common/widgets/custome_TextField.dart';
+
 import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/features/auth/services/auth_service.dart';
 import 'package:flutter/material.dart';
+
+import '../../../common/widgets/custome_textfield.dart';
 
 enum Auth {
   signin,
@@ -99,17 +101,19 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Form(
                     key: _signUpFormKey,
                     child: Column(children: [
-                      CustomeTextField(controller: _nameController, hint: 'Name'),
+                      CustomTextField(
+                          controller: _nameController, hintText: 'Name'),
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomeTextField(
-                          controller: _emailController, hint: 'Email'),
+                      CustomTextField(
+                          controller: _emailController, hintText: 'Email'),
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomeTextField(
-                          controller: _passwordController, hint: 'Password'),
+                      CustomTextField(
+                          controller: _passwordController,
+                          hintText: 'Password'),
                       const SizedBox(
                         height: 10,
                       ),
@@ -117,7 +121,7 @@ class _AuthScreenState extends State<AuthScreen> {
                           text: 'Sign in',
                           onTap: () {
                             _signUpFormKey.currentState!.validate();
-                           
+
                             signUpUser();
                           })
                     ]),
@@ -148,13 +152,14 @@ class _AuthScreenState extends State<AuthScreen> {
                   child: Form(
                     key: _signInFormKey,
                     child: Column(children: [
-                      CustomeTextField(
-                          controller: _emailController, hint: 'Email'),
+                      CustomTextField(
+                          controller: _emailController, hintText: 'Email'),
                       const SizedBox(
                         height: 10,
                       ),
-                      CustomeTextField(
-                          controller: _passwordController, hint: 'Password'),
+                      CustomTextField(
+                          controller: _passwordController,
+                          hintText: 'Password'),
                       const SizedBox(
                         height: 10,
                       ),

@@ -25,7 +25,12 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
           settings: routeSettings, builder: (_) => const HomeScreen());
 
     case BottomBar.routeName:
-      return MaterialPageRoute(builder: (_) => const BottomBar());
+      int length = routeSettings.arguments as int;
+
+      return MaterialPageRoute(
+          builder: (_) =>  BottomBar(
+               cartlength: length,
+              ));
 
     case PostScreen.routeName:
       return MaterialPageRoute(
@@ -82,7 +87,6 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
             return const CartScreen();
           },
           settings: routeSettings);
-          
 
     default:
       return MaterialPageRoute(

@@ -45,7 +45,7 @@ class _EcommerceAppState extends State<EcommerceApp> {
       onGenerateRoute: ((settings) => generateRoute(settings)),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
           ? Provider.of<UserProvider>(context).user.type == "user"
-              ? const BottomBar()
+              ?  BottomBar(cartlength: Provider.of<UserProvider>(context).user.cart.length ,)
               : const AdminScreen()
           : const AuthScreen(),
     );
