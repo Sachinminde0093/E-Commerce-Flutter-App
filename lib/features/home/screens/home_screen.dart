@@ -97,7 +97,7 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       body: SingleChildScrollView(
         child: Column(
-          children: [
+          children: const [
             AddressBar(),
             SizedBox(height: 10),
             TopCategories(),

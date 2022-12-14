@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/utils.dart';
@@ -27,7 +29,6 @@ class SearchService {
         },
       );
 
-      debugPrint(res.body);
 
       httpErrorHandle(
           response: res,
@@ -45,7 +46,6 @@ class SearchService {
       showSnackBar(context, "searchService:$err");
     }
 
-    debugPrint(products.length.toString());
     return products;
   }
 }

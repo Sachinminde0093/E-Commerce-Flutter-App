@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/error_handling.dart';
@@ -42,7 +44,6 @@ class HomeService {
     } catch (err) {
       showSnackBar(context, "error $err");
     }
-    debugPrint(productList.length.toString());
     return productList;
   }
 

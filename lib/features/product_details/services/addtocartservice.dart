@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/utils.dart';
@@ -26,7 +28,6 @@ class ProductServices {
           response: res,
           context: context,
           onSuccess: () {
-            debugPrint("usccess");
           });
     } catch (err) {
       showSnackBar(context, "rateproduct: $err");
@@ -38,7 +39,6 @@ class ProductServices {
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String? token = prefs.getString('auth-token');
-      debugPrint(token);
 
       http.Response res = await http.post(Uri.parse("$uri/api/add-to-cart"),
           body: jsonEncode({'id': id}),
@@ -51,7 +51,6 @@ class ProductServices {
           response: res,
           context: context,
           onSuccess: () {
-            debugPrint("usccess");
           });
     } catch (err) {
       showSnackBar(context, "rateproduct: $err");

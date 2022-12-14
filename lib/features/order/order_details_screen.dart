@@ -4,7 +4,7 @@ import 'package:provider/provider.dart';
 import '../../common/widgets/custom_button.dart';
 import '../../constants/globalvariables.dart';
 import '../../models/order.dart';
-import '../../provider/userProvider.dart';
+import '../../provider/user_provider.dart';
 import '../admin/services/adminservices.dart';
 import '../home/screens/searchscreen.dart';
 

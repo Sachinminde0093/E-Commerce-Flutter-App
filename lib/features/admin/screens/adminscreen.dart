@@ -14,7 +14,7 @@ class _AdminScreenState extends State<AdminScreen> {
   int _currntindex = 0;
 
   List<Widget> tabs = [
-    HomeScreen(),
+    const HomeScreen(),
     const Center(child: Text("S2")),
     const PostScreen()
   ];
@@ -31,7 +31,7 @@ class _AdminScreenState extends State<AdminScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(60),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           title: Row(
             children: [

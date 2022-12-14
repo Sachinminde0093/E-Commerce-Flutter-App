@@ -48,7 +48,7 @@ class AdminServices {
           category: category,
           images: imagesurls);
 
-      debugPrint(product.toJson());
+     
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('auth-token');
@@ -86,7 +86,7 @@ SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String? token = prefs.getString('auth-token');
 
-      debugPrint(token);
+     
       
       http.Response res =
           await http.get(Uri.parse("$uri/admin/get-product"), headers: {
@@ -125,7 +125,7 @@ SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String? token = prefs.getString('auth-token');
 
-      debugPrint(id);
+     
 
       http.Response res = await http.post(
           Uri.parse("$uri/admin/delete-product"),
@@ -136,7 +136,7 @@ SharedPreferences prefs = await SharedPreferences.getInstance();
           });
 
      
-      debugPrint(res.body);
+  
       httpErrorHandle(
           response: res,
           context: context,

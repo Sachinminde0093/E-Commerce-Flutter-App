@@ -11,7 +11,7 @@ import '../../../constants/globalvariables.dart';
 import '../../../constants/utils.dart';
 import '../../../models/products.dart';
 import '../../../models/user.dart';
-import '../../../provider/userProvider.dart';
+import '../../../provider/user_provider.dart';
 
 class AddressServices {
   void saveUserAddress({

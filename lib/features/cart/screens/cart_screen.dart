@@ -129,8 +129,9 @@ class _CartScreenState extends State<CartScreen> {
               height: 1,
             ),
             const SizedBox(height: 5),
+            // ignore: unnecessary_null_comparison
             (user.cart == null)
-                ? Text("Cart is empty")
+                ? const Text("Cart is empty")
                 : ListView.builder(
                     itemCount: user.cart.length,
                     shrinkWrap: true,

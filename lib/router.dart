@@ -41,7 +41,7 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
 
     case AddProduct.routeName:
       return MaterialPageRoute(
-          builder: (_) => AddProduct(), settings: routeSettings);
+          builder: (_) => const AddProduct(), settings: routeSettings);
 
     case AdminScreen.routeName:
       return MaterialPageRoute(

@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
+
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/utils.dart';
@@ -29,7 +31,6 @@ class ProductDetailServices {
           response: res,
           context: context,
           onSuccess: () {
-            debugPrint("usccess");
           });
     } catch (err) {
       showSnackBar(context, "rateproduct: $err");
@@ -37,13 +38,13 @@ class ProductDetailServices {
   }
 
   void addToCart(final id, BuildContext context) async {
+    // ignore: duplicate_ignore, duplicate_ignore
     try {
       final userProvider = Provider.of<UserProvider>(context, listen: false);
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
 
       String? token = prefs.getString('auth-token');
-      debugPrint(token);
 
       http.Response res = await http.post(Uri.parse("$uri/api/add-to-cart"),
           body: jsonEncode({'id': id}),

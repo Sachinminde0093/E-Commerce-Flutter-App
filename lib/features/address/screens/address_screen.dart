@@ -209,7 +209,7 @@ class _AddressScreenState extends State<AddressScreen> {
                   child: CircularProgressIndicator(),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 height: 10,
               ),
               CustomButton(

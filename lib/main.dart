@@ -12,10 +12,12 @@ import 'constants/globalvariables.dart';
 void main(List<String> args) {
   runApp(MultiProvider(providers: [
     ChangeNotifierProvider(create: ((context) => UserProvider()))
-  ], child: EcommerceApp()));
+  ], child: const EcommerceApp()));
 }
 
 class EcommerceApp extends StatefulWidget {
+  const EcommerceApp({super.key});
+
   @override
   State<EcommerceApp> createState() => _EcommerceAppState();
 }

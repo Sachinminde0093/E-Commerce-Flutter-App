@@ -27,5 +27,6 @@ Future<List<File>?> picImages() async {
     return images;
   } catch (e) {
     debugPrint(e.toString());
-  } 
+  }
+  return null;
 }

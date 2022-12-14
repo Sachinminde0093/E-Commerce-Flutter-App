@@ -1,5 +1,4 @@
 import 'package:e_commerce_app/features/account/widgets/single_product.dart';
-import 'package:e_commerce_app/features/order/order_details_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -34,8 +33,6 @@ class _OrdersState extends State<Orders> {
   Widget build(BuildContext context) {
     return orders == null
         ? const Loader()
-        : orders!.isEmpty
-            ? Text("")
             : Column(
                 children: [
                   Row(

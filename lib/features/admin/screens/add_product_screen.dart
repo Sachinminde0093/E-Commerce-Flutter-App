@@ -12,6 +12,8 @@ AdminServices adminServices = AdminServices();
 
 class AddProduct extends StatefulWidget {
   static const routeName = "./AddProduct";
+
+  const AddProduct({super.key});
   @override
   State<AddProduct> createState() => _AddProductState();
 }

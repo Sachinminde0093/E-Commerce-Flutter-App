@@ -1,4 +1,4 @@
-// ignore_for_file: use_build_context_synchronously
+// ignore_for_file: use_build_context_synchronously, duplicate_ignore
 
 import 'dart:convert';
 
@@ -33,7 +33,6 @@ class AuthService {
         cart: [],
       );
 
-      print(email);
 
       http.Response res = await http.post(
         Uri.parse("$uri/api/signup"),
@@ -71,6 +70,7 @@ class AuthService {
       httpErrorHandle(
           response: res,
           context: context,
+          // ignore: duplicate_ignore
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
@@ -81,7 +81,6 @@ class AuthService {
 
             final type =
                 Provider.of<UserProvider>(context, listen: false).user.type;
-            
 
             (type == "user")
                 ? Navigator.pushNamedAndRemoveUntil(
@@ -98,7 +97,7 @@ class AuthService {
             showSnackBar(context, "user login successful");
           });
     } catch (e) {
-      showSnackBar(context, e.toString() + "error");
+      showSnackBar(context, "${e}error");
     }
   }
 
@@ -108,12 +107,10 @@ class AuthService {
 
       String? token = prefs.getString("auth-token");
 
-      
-
       var tokenres = await http.post(Uri.parse("$uri/tokenisvalid"),
           headers: <String, String>{
             'Conteent-type': 'application/json; charset=UTF-8',
-            'auth-token': token ??""
+            'auth-token': token ?? ""
           });
 
       var isvalid = jsonDecode(tokenres.body);
@@ -122,12 +119,11 @@ class AuthService {
         http.Response userRes = await http.get(Uri.parse("$uri/"),
             headers: <String, String>{
               'Content-type': 'application/json; charset=UTF-8',
-              'auth-token': token ??""
+              'auth-token': token ?? ""
             });
 
         var userProvider = Provider.of<UserProvider>(context, listen: false);
         userProvider.setUser(userRes.body);
-        print(userProvider.user.email);
       }
     } catch (e) {
       showSnackBar(context, e.toString());
