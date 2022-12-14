@@ -19,29 +19,28 @@ class SearchService {
 
 // token is null give error
 
-      // http.Response res = await http.get(
-      //   Uri.parse("$uri/api/search/$searchparam"),
-      //   headers: <String, String>{
-      //     'Content-Type': 'application/json; charset=UTF-8',
-      //     'auth-token': token!,
-      //   },
-      // );
+      http.Response res = await http.get(
+        Uri.parse("$uri/api/search/$searchparam"),
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+          'auth-token': token ?? '',
+        },
+      );
 
-     
-      // debugPrint(res.body);
+      debugPrint(res.body);
 
-      // httpErrorHandle(
-      //     response: res,
-      //     context: context,
-      //     onSuccess: () {
-      //       for (int i = 0; i < jsonDecode(res.body).length; i++) {
-      //         products.add(
-      //           Product.fromJson(
-      //             jsonEncode(jsonDecode(res.body)[i]),
-      //           ),
-      //         );
-      //       }
-      //     });
+      httpErrorHandle(
+          response: res,
+          context: context,
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              products.add(
+                Product.fromJson(
+                  jsonEncode(jsonDecode(res.body)[i]),
+                ),
+              );
+            }
+          });
     } catch (err) {
       showSnackBar(context, "searchService:$err");
     }

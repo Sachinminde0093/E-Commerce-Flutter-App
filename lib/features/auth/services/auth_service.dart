@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/error_handling.dart';
@@ -79,7 +81,7 @@ class AuthService {
 
             final type =
                 Provider.of<UserProvider>(context, listen: false).user.type;
-            //ignore: use_build_context_synchronously
+            
 
             (type == "user")
                 ? Navigator.pushNamedAndRemoveUntil(
@@ -106,15 +108,12 @@ class AuthService {
 
       String? token = prefs.getString("auth-token");
 
-      if (token == null) {
-        prefs.setString("auth-token", '');
-        return;
-      }
+      
 
       var tokenres = await http.post(Uri.parse("$uri/tokenisvalid"),
           headers: <String, String>{
             'Conteent-type': 'application/json; charset=UTF-8',
-            'auth-token': token
+            'auth-token': token ??""
           });
 
       var isvalid = jsonDecode(tokenres.body);
@@ -123,7 +122,7 @@ class AuthService {
         http.Response userRes = await http.get(Uri.parse("$uri/"),
             headers: <String, String>{
               'Content-type': 'application/json; charset=UTF-8',
-              'auth-token': token
+              'auth-token': token ??""
             });
 
         var userProvider = Provider.of<UserProvider>(context, listen: false);

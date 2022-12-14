@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -52,6 +54,7 @@ class AddressServices {
     required String address,
     required double totalSum,
   }) async {
+    debugPrint("placed order");
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       http.Response res = await http.post(Uri.parse('$uri/api/order'),

@@ -1,4 +1,4 @@
-
+import 'package:e_commerce_app/common/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
@@ -95,15 +95,16 @@ class _AddressScreenState extends State<AddressScreen> {
       if (_addressFormKey.currentState!.validate()) {
         addressToBeUsed =
             '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
+        onGooglePayResult("res");
       } else {
         throw Exception('Please enter all the values!');
       }
     } else if (addressFromProvider.isNotEmpty) {
       addressToBeUsed = addressFromProvider;
+      onGooglePayResult("res");
     } else {
       showSnackBar(context, 'ERROR');
-        throw Exception('Please enter all the values!');
-
+      throw Exception('Please enter all the values!');
     }
   }
 
@@ -208,6 +209,14 @@ class _AddressScreenState extends State<AddressScreen> {
                   child: CircularProgressIndicator(),
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              CustomButton(
+                  text: "confirm order",
+                  onTap: () {
+                    payPressed(address);
+                  })
             ],
           ),
         ),

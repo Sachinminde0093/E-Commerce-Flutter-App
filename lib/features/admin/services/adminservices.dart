@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
 import 'dart:io';
@@ -55,7 +57,7 @@ class AdminServices {
           body: product.toJson(),
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            'auth-token': token!
+            'auth-token': token ??""
           });
 
       // print(res.body.toString());
@@ -130,7 +132,7 @@ SharedPreferences prefs = await SharedPreferences.getInstance();
           body: jsonEncode({"id": id}),
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            'auth-token': token!,
+            'auth-token': token ??'',
           });
 
      
@@ -153,7 +155,7 @@ SharedPreferences prefs = await SharedPreferences.getInstance();
       http.Response res =
           await http.get(Uri.parse('$uri/admin/get-orders'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
+        'auth-token': userProvider.user.token ,
       });
 
       httpErrorHandle(
@@ -190,7 +192,7 @@ SharedPreferences prefs = await SharedPreferences.getInstance();
         Uri.parse('$uri/admin/change-order-status'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
+          'auth-token': userProvider.user.token,
         },
         body: jsonEncode({
           'id': order.id,

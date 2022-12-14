@@ -1,8 +1,8 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:convert';
 
-import 'package:e_commerce_app/provider/userProvider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/error_handling.dart';
@@ -16,13 +16,15 @@ class AccountServices {
   Future<List<Order>> fetchMyOrders({
     required BuildContext context,
   }) async {
-    final userProvider = Provider.of<UserProvider>(context, listen: false);
+    debugPrint("orderList");
+
     List<Order> orderList = [];
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     try {
       http.Response res =
           await http.get(Uri.parse('$uri/api/orders/me'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
+        'auth-token': prefs.getString("auth-token") ?? "",
       });
 
       httpErrorHandle(
@@ -44,8 +46,6 @@ class AccountServices {
       showSnackBar(context, e.toString());
     }
 
-    debugPrint("orderList");
-    ;
     return orderList;
   }
 
@@ -53,7 +53,7 @@ class AccountServices {
     try {
       SharedPreferences sharedPreferences =
           await SharedPreferences.getInstance();
-      await sharedPreferences.setString('x-auth-token', '');
+      await sharedPreferences.setString('auth-token', '');
       Navigator.pushNamedAndRemoveUntil(
         context,
         AuthScreen.routeName,

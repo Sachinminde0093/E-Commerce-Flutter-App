@@ -19,7 +19,7 @@ class ProductServices {
           body: jsonEncode({'id': id, 'rating': rating}),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-            'auth-token': token!
+            'auth-token': token??""
           });
 
       httpErrorHandle(
@@ -44,7 +44,7 @@ class ProductServices {
           body: jsonEncode({'id': id}),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-            'auth-token': token!
+            'auth-token': token??""
           });
 
       httpErrorHandle(

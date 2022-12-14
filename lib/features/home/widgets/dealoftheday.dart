@@ -83,7 +83,7 @@ class _DealOfDayState extends State<DealOfDay> {
                             .map(
                               (e) => Image.network(
                                 e,
-                                fit: BoxFit.fitWidth,
+                                fit: BoxFit.fill,
                                 width: 100,
                                 height: 100,
                               ),

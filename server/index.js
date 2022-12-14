@@ -11,7 +11,8 @@ const userRouter = require("./routes/user");
 // INIT
 const PORT = process.env.PORT || 3000;
 const app = express();
-const DB = "mongodb://127.0.0.1:27017/user";
+const DB =
+  "mongodb+srv://sachinminde:Sachinraj0093@cluster1.xyowdc6.mongodb.net/user";
 
 // middleware
 app.use(express.json());

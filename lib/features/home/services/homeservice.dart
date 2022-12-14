@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'package:e_commerce_app/constants/error_handling.dart';
 import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/models/products.dart';
-import 'package:e_commerce_app/provider/userProvider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/globalvariables.dart';
@@ -24,7 +22,7 @@ class HomeService {
           Uri.parse("$uri/api/get-category-product?category=$category"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
-            'auth-token': token!
+            'auth-token': token ?? ''
           });
 
       // debugPrint(res.body);
@@ -51,8 +49,8 @@ class HomeService {
   Future<Product> fetchDealOfDay({
     required BuildContext context,
   }) async {
-    UserProvider userProvider =
-        Provider.of<UserProvider>(context, listen: false);
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? token = prefs.getString('auth-token');
     Product product = Product(
       name: '',
       description: '',
@@ -66,7 +64,7 @@ class HomeService {
       http.Response res =
           await http.get(Uri.parse('$uri/api/deal-of-day'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
-        'x-auth-token': userProvider.user.token,
+        'auth-token': token ?? '',
       });
 
       httpErrorHandle(

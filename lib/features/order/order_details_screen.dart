@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../../../common/widgets/custom_button.dart';
-import '../../../constants/globalvariables.dart';
-import '../../../models/order.dart';
-import '../../../provider/userProvider.dart';
-import '../../admin/services/adminservices.dart';
-import '../../home/screens/searchscreen.dart';
+import '../../common/widgets/custom_button.dart';
+import '../../constants/globalvariables.dart';
+import '../../models/order.dart';
+import '../../provider/userProvider.dart';
+import '../admin/services/adminservices.dart';
+import '../home/screens/searchscreen.dart';
 
 class OrderDetailScreen extends StatefulWidget {
   static const String routeName = '/order-details';

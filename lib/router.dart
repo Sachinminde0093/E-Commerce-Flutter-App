@@ -7,13 +7,12 @@ import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
 import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
-import 'package:e_commerce_app/features/order/order_detailsScreen.dart';
+import 'package:e_commerce_app/features/order/order_details_screen.dart';
 import 'package:e_commerce_app/features/product_details/screens/productdetailscreen.dart';
 import 'package:e_commerce_app/features/home/screens/searchscreen.dart';
 import 'package:e_commerce_app/models/products.dart';
 import 'package:flutter/material.dart';
 
-import 'features/account/widgets/orders.dart';
 import 'models/order.dart';
 
 Route<dynamic>? generateRoute(RouteSettings routeSettings) {
@@ -32,8 +31,8 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
       int length = routeSettings.arguments as int;
 
       return MaterialPageRoute(
-          builder: (_) =>  BottomBar(
-               cartlength: length,
+          builder: (_) => BottomBar(
+                cartlength: length,
               ));
 
     case PostScreen.routeName:
@@ -84,14 +83,19 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
           );
         },
       );
-
+    case OrderDetailScreen.routeName:
+      Order order = routeSettings.arguments as Order;
+      return MaterialPageRoute(
+          builder: ((context) {
+            return OrderDetailScreen(order: order);
+          }),
+          settings: routeSettings);
     case CartScreen.routeName:
       return MaterialPageRoute(
           builder: (context) {
             return const CartScreen();
           },
           settings: routeSettings);
-          
 
     default:
       return MaterialPageRoute(
