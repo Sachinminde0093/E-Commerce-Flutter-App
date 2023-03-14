@@ -21,7 +21,7 @@ class HomeService {
       String? token = prefs.getString('auth-token');
 
       http.Response res = await http.get(
-          Uri.parse("$uri/api/get-category-product?category=$category"),
+          Uri.parse("${uri}api/get-category-product?category=$category"),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'auth-token': token ?? ''
@@ -42,7 +42,7 @@ class HomeService {
             }
           });
     } catch (err) {
-      showSnackBar(context, "error $err");
+      showSnackBar(context, "category Product error $err");
     }
     return productList;
   }
@@ -63,7 +63,7 @@ class HomeService {
 
     try {
       http.Response res =
-          await http.get(Uri.parse('$uri/api/deal-of-day'), headers: {
+          await http.get(Uri.parse('${uri}api/deal-of-day'), headers: {
         'Content-Type': 'application/json; charset=UTF-8',
         'auth-token': token ?? '',
       });
@@ -76,7 +76,7 @@ class HomeService {
         },
       );
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, "deal of the day error:$e");
     }
     return product;
   }

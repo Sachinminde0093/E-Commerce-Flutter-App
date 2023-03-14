@@ -6,7 +6,7 @@ const searchRouter = express.Router();
 
 searchRouter.get("/api/search/:name", auth, async (req, res) => {
   try {
-    console.log(req.params.name);
+    // console.log(req.params.name);
     var product = await Product.find({
       name: { $regex: req.params.name, $options: "i" },
     });

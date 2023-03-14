@@ -1,5 +1,3 @@
-// ignore_for_file: use_build_context_synchronously
-
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -18,20 +16,20 @@ class AddressServices {
     required BuildContext context,
     required String address,
   }) async {
-    final userProvider = context.watch<UserProvider>();
-
+    final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
       http.Response res = await http.post(
-        Uri.parse('$uri/api/save-user-address'),
+        Uri.parse('${uri}api/save-user-address'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
+          'auth-token': userProvider.user.token,
         },
         body: jsonEncode({
           'address': address,
         }),
       );
 
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -57,10 +55,10 @@ class AddressServices {
     debugPrint("placed order");
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     try {
-      http.Response res = await http.post(Uri.parse('$uri/api/order'),
+      http.Response res = await http.post(Uri.parse('${uri}api/order'),
           headers: {
             'Content-Type': 'application/json; charset=UTF-8',
-            'x-auth-token': userProvider.user.token,
+            'auth-token': userProvider.user.token,
           },
           body: jsonEncode({
             'cart': userProvider.user.cart,
@@ -68,6 +66,7 @@ class AddressServices {
             'totalPrice': totalSum,
           }));
 
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,
@@ -93,16 +92,17 @@ class AddressServices {
 
     try {
       http.Response res = await http.post(
-        Uri.parse('$uri/admin/delete-product'),
+        Uri.parse('${uri}admin/delete-product'),
         headers: {
           'Content-Type': 'application/json; charset=UTF-8',
-          'x-auth-token': userProvider.user.token,
+          'auth-token': userProvider.user.token,
         },
         body: jsonEncode({
           'id': product.id,
         }),
       );
 
+      // ignore: use_build_context_synchronously
       httpErrorHandle(
         response: res,
         context: context,

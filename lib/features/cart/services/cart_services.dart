@@ -2,7 +2,7 @@
 
 import 'dart:convert';
 
-import 'package:e_commerce_app/provider/userprovider.dart';
+import 'package:e_commerce_app/provider/user_provider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -25,7 +25,7 @@ class CartServices {
       debugPrint(token);
 
       http.Response res = await http.delete(
-          Uri.parse('$uri/api/remove-from-cart/$id'),
+          Uri.parse('${uri}api/remove-from-cart/$id'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
             'auth-token': token!

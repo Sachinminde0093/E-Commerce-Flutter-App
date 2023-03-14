@@ -1,19 +1,24 @@
 import 'package:e_commerce_app/common/widgets/loader.dart';
-import 'package:e_commerce_app/models/products.dart';
+import 'package:e_commerce_app/features/account/widgets/single_product.dart';
 import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
+import 'package:e_commerce_app/features/admin/services/admin_services.dart';
+import 'package:e_commerce_app/models/products.dart';
 import 'package:flutter/material.dart';
 
-class PostScreen extends StatefulWidget {
-  static const routeName = "./PostScreen";
+class PostsScreen extends StatefulWidget {
+  static const String routeName = '/post-screen';
 
-  const PostScreen({super.key});
+  const PostsScreen({Key? key}) : super(key: key);
 
   @override
-  State<PostScreen> createState() => _PostScreenState();
+  State<PostsScreen> createState() => _PostsScreenState();
 }
 
-class _PostScreenState extends State<PostScreen> {
-  List<Product>? productList;
+class _PostsScreenState extends State<PostsScreen> {
+  List<Product>? products;
+  final AdminServices adminServices = AdminServices();
+
+  bool flag = true;
 
   @override
   void initState() {
@@ -21,71 +26,83 @@ class _PostScreenState extends State<PostScreen> {
     fetchAllProducts();
   }
 
-  void fetchAllProducts() async {
-    productList = await adminServices.fetchAllProduct(context);
-    setState(() {});
-  }
-
-  void deleteProduct(int index, String? id) {
-    adminServices.deleteProduct(context, id!, () {
-      productList?.removeAt(index);
-      setState(() {});
+  fetchAllProducts() async {
+    products = await adminServices.fetchAllProducts(context);
+    setState(() {
+      flag = false;
     });
   }
 
-  void loadImage(int index) {}
+  void deleteProduct(Product product, int index) {
+    adminServices.deleteProduct(
+      context: context,
+      product: product,
+      onSuccess: () {
+        products!.removeAt(index);
+        setState(() {});
+      },
+    );
+  }
 
   void navigateToAddProduct() {
-    Navigator.pushNamed(context, AddProduct.routeName);
+    Navigator.pushNamed(context, AddProductScreen.routeName);
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: productList == null
+      body: products == null && flag
           ? const Loader()
-          // : Center(
-          //     child: Text("Hava hava"),
-          //   ),
-          : GridView.builder(
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2),
-              itemCount: productList!.length,
-              itemBuilder: (context, index) {
-                return Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                          height: 140,
-                          child: Image.network(productList![index].images[0])),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          : products == null
+              ? const Center(
+                  child: Text("Products are not available"),
+                )
+              : Container(
+                  padding: const EdgeInsets.only(top: 5, right: 5, left: 5),
+                  child: GridView.builder(
+                    itemCount: products!.length,
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2),
+                    itemBuilder: (context, index) {
+                      final productData = products![index];
+                      return Column(
                         children: [
-                          Expanded(
-                            child: Text(
-                              productList![index].name,
-                              overflow: TextOverflow.ellipsis,
+                          SizedBox(
+                            height: 140,
+                            child: SingleProduct(
+                              image: productData.images[0],
                             ),
                           ),
-                          IconButton(
-                            onPressed: () {
-                              deleteProduct(index, productList![index].id);
-                            },
-                            icon: const Icon(Icons.delete),
+                          Expanded(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    productData.name,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () =>
+                                      deleteProduct(productData, index),
+                                  icon: const Icon(
+                                    Icons.delete_outline,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
-                      ),
-                    ],
+                      );
+                    },
                   ),
-                );
-              },
-            ),
+                ),
       floatingActionButton: FloatingActionButton(
-        tooltip: "Add Product",
-        onPressed: (() {
-          navigateToAddProduct();
-        }),
+        onPressed: navigateToAddProduct,
+        tooltip: 'Add a Product',
         child: const Icon(Icons.add),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

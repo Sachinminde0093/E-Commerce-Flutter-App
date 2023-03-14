@@ -22,9 +22,9 @@ productRouter.get("/api/demo", (req, res) => {
 productRouter.post("/api/rate-product", auth, async (req, res) => {
   try {
     const { id, rating } = req.body;
-    console.log(req.body);
+    // console.log(req.body);
     let product = await Product.findById(id);
-    console.log(product);
+    // console.log(product);
 
     for (let i = 0; i < product.ratings.length; i++) {
       if (product.ratings[i].userId == req.user) {
@@ -39,7 +39,7 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
 
     product.ratings.push(ratingSchema);
 
-    console.log(product);
+    // console.log(product);
 
     var prod = await product.save();
 
@@ -51,6 +51,8 @@ productRouter.post("/api/rate-product", auth, async (req, res) => {
 
 productRouter.get("/api/deal-of-day", auth, async (req, res) => {
   try {
+    // console.log("deal of the day");
+
     let products = await Product.find({});
 
     products = products.sort((a, b) => {

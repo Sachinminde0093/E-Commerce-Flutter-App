@@ -3,19 +3,25 @@
 import 'dart:convert';
 
 import 'package:e_commerce_app/constants/error_handling.dart';
+import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/constants/utils.dart';
 import 'package:e_commerce_app/features/home/screens/home_screen.dart';
-import 'package:e_commerce_app/provider/userprovider.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:http/http.dart' as http;
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../common/widgets/botom_bar.dart';
-import '../../../constants/globalvariables.dart';
 import '../../../models/user.dart';
+import '../../../provider/user_provider.dart';
 
 class AuthService {
+  void get() async {
+    try {
+      // ignore: empty_catches
+    } catch (e) {}
+  }
+
   void signUpUser(
       {required BuildContext context,
       required String email,
@@ -33,9 +39,8 @@ class AuthService {
         cart: [],
       );
 
-
       http.Response res = await http.post(
-        Uri.parse("$uri/api/signup"),
+        Uri.parse("${uri}api/signup"),
         body: user.toJson(),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
@@ -49,7 +54,7 @@ class AuthService {
                 showSnackBar(context, 'Account Has been created Successfully.'),
               });
     } catch (e) {
-      showSnackBar(context, e.toString());
+      showSnackBar(context, " signUp error$e");
     }
   }
 
@@ -57,24 +62,19 @@ class AuthService {
       {required BuildContext context,
       required String email,
       required String password}) async {
-    // print(email + password);
     try {
-      http.Response res = await http.post(Uri.parse("$uri/api/signin"),
+      http.Response res = await http.post(Uri.parse("${uri}api/signin"),
           body: jsonEncode({'email': email, 'password': password}),
           headers: <String, String>{
             'Content-type': 'application/json; charset=UTF-8'
           });
 
-      // print(res.body.toString());
-
       httpErrorHandle(
           response: res,
           context: context,
-          // ignore: duplicate_ignore
           onSuccess: () async {
             SharedPreferences prefs = await SharedPreferences.getInstance();
 
-            // ignore: use_build_context_synchronously
             Provider.of<UserProvider>(context, listen: false).setUser(res.body);
 
             await prefs.setString("auth-token", jsonDecode(res.body)['token']);
@@ -84,10 +84,11 @@ class AuthService {
 
             (type == "user")
                 ? Navigator.pushNamedAndRemoveUntil(
-                    context,
-                    BottomBar.routeName,
-                    (route) => false,
-                  )
+                    context, BottomBar.routeName, (route) => false,
+                    arguments: Provider.of<UserProvider>(context, listen: false)
+                        .user
+                        .cart
+                        .length)
                 : Navigator.pushNamedAndRemoveUntil(
                     context,
                     HomeScreen.routeName,
@@ -107,7 +108,7 @@ class AuthService {
 
       String? token = prefs.getString("auth-token");
 
-      var tokenres = await http.post(Uri.parse("$uri/tokenisvalid"),
+      var tokenres = await http.post(Uri.parse("${uri}tokenisvalid"),
           headers: <String, String>{
             'Conteent-type': 'application/json; charset=UTF-8',
             'auth-token': token ?? ""
@@ -116,7 +117,7 @@ class AuthService {
       var isvalid = jsonDecode(tokenres.body);
 
       if (isvalid == true) {
-        http.Response userRes = await http.get(Uri.parse("$uri/"),
+        http.Response userRes = await http.get(Uri.parse(uri),
             headers: <String, String>{
               'Content-type': 'application/json; charset=UTF-8',
               'auth-token': token ?? ""
@@ -126,7 +127,8 @@ class AuthService {
         userProvider.setUser(userRes.body);
       }
     } catch (e) {
-      showSnackBar(context, e.toString());
+      debugPrint(e.toString());
+      // showSnackBar(context, e.toString());
     }
   }
 }

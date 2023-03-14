@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/features/home/services/homeservice.dart';
+import 'package:e_commerce_app/features/product_details/screens/productdetailscreen.dart';
 import 'package:flutter/material.dart';
 
 import '../../../common/widgets/loader.dart';
@@ -15,6 +16,8 @@ class _DealOfDayState extends State<DealOfDay> {
   Product? product;
   final HomeService homeServices = HomeService();
 
+  bool flag = true;
+
   @override
   void initState() {
     super.initState();
@@ -27,17 +30,21 @@ class _DealOfDayState extends State<DealOfDay> {
   }
 
   void navigateToDetailScreen() {
-    // Navigator.pushNamed(
-    //   context,
-    //  ProductDetailScreen.routeName,
-    //   arguments: product,
-    // );
+    Navigator.pushNamed(
+      context,
+      ProductDetailsScreen.routeName,
+      arguments: product,
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return product == null
-        ? const Loader()
+        ? flag
+            ? const Loader()
+            : const SizedBox(
+                height: 5,
+              )
         : product!.name.isEmpty
             ? const SizedBox()
             : GestureDetector(
@@ -81,11 +88,14 @@ class _DealOfDayState extends State<DealOfDay> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: product!.images
                             .map(
-                              (e) => Image.network(
-                                e,
-                                fit: BoxFit.fill,
-                                width: 100,
-                                height: 100,
+                              (e) => Container(
+                                margin: const EdgeInsets.all(5),
+                                child: Image.network(
+                                  e,
+                                  fit: BoxFit.fill,
+                                  width: 100,
+                                  height: 100,
+                                ),
                               ),
                             )
                             .toList(),

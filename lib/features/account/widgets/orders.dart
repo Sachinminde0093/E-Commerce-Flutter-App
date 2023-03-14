@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/features/account/widgets/single_product.dart';
+import 'package:e_commerce_app/features/order/order_details_screen.dart';
 
 import 'package:flutter/material.dart';
 
@@ -33,6 +34,10 @@ class _OrdersState extends State<Orders> {
   Widget build(BuildContext context) {
     return orders == null
         ? const Loader()
+        : orders!.isEmpty
+            ? const Center(
+                child: Text("No orders"),
+              )
             : Column(
                 children: [
                   Row(
@@ -76,7 +81,13 @@ class _OrdersState extends State<Orders> {
                       itemCount: orders!.length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              OrderDetailScreen.routeName,
+                              arguments: orders![index],
+                            );
+                          },
                           child: SingleProduct(
                             image: orders![index].products[0].images[0],
                           ),
@@ -88,5 +99,3 @@ class _OrdersState extends State<Orders> {
               );
   }
 }
-
-class OrderDetailScreen {}

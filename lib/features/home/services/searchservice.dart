@@ -22,13 +22,12 @@ class SearchService {
 // token is null give error
 
       http.Response res = await http.get(
-        Uri.parse("$uri/api/search/$searchparam"),
+        Uri.parse("${uri}api/search/$searchparam"),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
           'auth-token': token ?? '',
         },
       );
-
 
       httpErrorHandle(
           response: res,

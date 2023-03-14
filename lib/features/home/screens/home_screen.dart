@@ -1,11 +1,11 @@
 import 'package:e_commerce_app/constants/globalvariables.dart';
 import 'package:e_commerce_app/features/home/screens/searchscreen.dart';
+import 'package:e_commerce_app/features/home/widgets/addressbar.dart';
 import 'package:e_commerce_app/features/home/widgets/crouselimage.dart';
 import 'package:e_commerce_app/features/home/widgets/dealoftheday.dart';
 import 'package:e_commerce_app/features/home/widgets/topcategories.dart';
-import 'package:flutter/material.dart';
 
-import '../widgets/addressbar.dart';
+import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {
   static const String routeName = '/home';

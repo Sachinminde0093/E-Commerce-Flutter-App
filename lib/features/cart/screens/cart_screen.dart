@@ -1,5 +1,5 @@
 import 'package:e_commerce_app/constants/globalvariables.dart';
-import 'package:e_commerce_app/provider/userprovider.dart';
+import 'package:e_commerce_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -110,29 +110,30 @@ class _CartScreenState extends State<CartScreen> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const AddressBar(),
-            const CartSubtotal(),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: CustomButton(
-                text: 'Proceed to Buy ', //(${user.cart.length} items)',
-                onTap: () => navigateToAddress(sum),
-                //color: Colors.yellow[600],
-              ),
+      body: Column(
+        children: [
+          const AddressBar(),
+          const CartSubtotal(),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: CustomButton(
+              text: 'Proceed to Buy ', //(${user.cart.length} items)',
+              // ignore: unnecessary_null_comparison
+              onTap: () => (user.cart.isEmpty) ? null : navigateToAddress(sum),
+              //color: Colors.yellow[600],
             ),
-            const SizedBox(height: 15),
-            Container(
-              color: Colors.black12.withOpacity(0.08),
-              height: 1,
-            ),
-            const SizedBox(height: 5),
-            // ignore: unnecessary_null_comparison
-            (user.cart == null)
-                ? const Text("Cart is empty")
-                : ListView.builder(
+          ),
+          const SizedBox(height: 15),
+          Container(
+            color: Colors.black12.withOpacity(0.08),
+            height: 1,
+          ),
+          const SizedBox(height: 5),
+          // ignore: unnecessary_null_comparison
+          (user.cart == null)
+              ? const Text("Cart is empty")
+              : Expanded(
+                  child: ListView.builder(
                     itemCount: user.cart.length,
                     shrinkWrap: true,
                     itemBuilder: (context, index) {
@@ -141,8 +142,8 @@ class _CartScreenState extends State<CartScreen> {
                       );
                     },
                   ),
-          ],
-        ),
+                ),
+        ],
       ),
     );
   }

@@ -24,28 +24,33 @@ class TopCategories extends StatelessWidget {
               context,
               GlobalVariables.categoryImages[index]['title']!,
             ),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 10),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.asset(
-                      GlobalVariables.categoryImages[index]['image']!,
-                      fit: BoxFit.cover,
-                      height: 40,
-                      width: 40,
+            child: SizedBox(
+              height: 60,
+              child: Column(
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 10),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(50),
+                      child: Image.asset(
+                        GlobalVariables.categoryImages[index]['image']!,
+                        fit: BoxFit.cover,
+                        height: 40,
+                        width: 40,
+                      ),
                     ),
                   ),
-                ),
-                Text(
-                  GlobalVariables.categoryImages[index]['title']!,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400,
+                  Expanded(
+                    child: Text(
+                      GlobalVariables.categoryImages[index]['title']!,
+                      style: const TextStyle(
+                        fontSize: 12,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           );
         },

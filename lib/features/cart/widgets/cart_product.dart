@@ -1,4 +1,4 @@
-import 'package:e_commerce_app/provider/userprovider.dart';
+import 'package:e_commerce_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -24,6 +24,7 @@ class _CartProductState extends State<CartProduct> {
 
   void increaseQuantity(Product product) {
     productDetailServices.addToCart(product.id, context);
+    
   }
 
   void decreaseQuantity(Product product) {
@@ -52,48 +53,50 @@ class _CartProductState extends State<CartProduct> {
                 height: 135,
                 width: 135,
               ),
-              Column(
-                children: [
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.symmetric(horizontal: 10),
-                    child: Text(
-                      product.name,
-                      style: const TextStyle(
-                        fontSize: 16,
+              Expanded(
+                child: Column(
+                  children: [
+                    Container(
+                      width: 235,
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Text(
+                        product.name,
+                        style: const TextStyle(
+                          fontSize: 16,
+                        ),
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: Text(
-                      '\$${product.price}',
-                      style: const TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
+                    Container(
+                      width: 235,
+                      padding: const EdgeInsets.only(left: 10, top: 5),
+                      child: Text(
+                        '\$${product.price}',
+                        style: const TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
                     ),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10),
-                    child: const Text('Eligible for FREE Shipping'),
-                  ),
-                  Container(
-                    width: 235,
-                    padding: const EdgeInsets.only(left: 10, top: 5),
-                    child: const Text(
-                      'In Stock',
-                      style: TextStyle(
-                        color: Colors.teal,
+                    Container(
+                      width: 235,
+                      padding: const EdgeInsets.only(left: 10),
+                      child: const Text('Eligible for FREE Shipping'),
+                    ),
+                    Container(
+                      width: 235,
+                      padding: const EdgeInsets.only(left: 10, top: 5),
+                      child: const Text(
+                        'In Stock',
+                        style: TextStyle(
+                          color: Colors.teal,
+                        ),
+                        maxLines: 2,
                       ),
-                      maxLines: 2,
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ],
           ),

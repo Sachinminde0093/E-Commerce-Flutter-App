@@ -1,4 +1,5 @@
 import 'package:e_commerce_app/common/widgets/custom_button.dart';
+import 'package:e_commerce_app/provider/user_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:pay/pay.dart';
 import 'package:provider/provider.dart';
@@ -6,7 +7,6 @@ import 'package:provider/provider.dart';
 import '../../../common/widgets/custome_textfield.dart';
 import '../../../constants/globalvariables.dart';
 import '../../../constants/utils.dart';
-import '../../../provider/userprovider.dart';
 import '../services/address_services.dart';
 
 class AddressScreen extends StatefulWidget {
@@ -97,14 +97,13 @@ class _AddressScreenState extends State<AddressScreen> {
             '${flatBuildingController.text}, ${areaController.text}, ${cityController.text} - ${pincodeController.text}';
         onGooglePayResult("res");
       } else {
-        throw Exception('Please enter all the values!');
+        debugPrint("error from pay pressed google pay");
       }
     } else if (addressFromProvider.isNotEmpty) {
       addressToBeUsed = addressFromProvider;
       onGooglePayResult("res");
     } else {
-      showSnackBar(context, 'ERROR');
-      throw Exception('Please enter all the values!');
+      showSnackBar(context, 'Enter your Address');
     }
   }
 

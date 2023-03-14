@@ -1,8 +1,9 @@
 import 'package:e_commerce_app/common/widgets/botom_bar.dart';
 import 'package:e_commerce_app/features/address/screens/address_screen.dart';
 import 'package:e_commerce_app/features/admin/screens/add_product_screen.dart';
-import 'package:e_commerce_app/features/admin/screens/adminscreen.dart';
+import 'package:e_commerce_app/features/admin/screens/admin_screen.dart';
 import 'package:e_commerce_app/features/admin/screens/posts_screen.dart';
+
 import 'package:e_commerce_app/features/auth/screens/auth_screen.dart';
 import 'package:e_commerce_app/features/cart/screens/cart_screen.dart';
 import 'package:e_commerce_app/features/home/screens/category_deals_screen.dart';
@@ -29,19 +30,18 @@ Route<dynamic>? generateRoute(RouteSettings routeSettings) {
 
     case BottomBar.routeName:
       int length = routeSettings.arguments as int;
-
       return MaterialPageRoute(
           builder: (_) => BottomBar(
                 cartlength: length,
               ));
 
-    case PostScreen.routeName:
+    case PostsScreen.routeName:
       return MaterialPageRoute(
-          builder: (_) => const PostScreen(), settings: routeSettings);
+          builder: (_) => const PostsScreen(), settings: routeSettings);
 
-    case AddProduct.routeName:
+    case AddProductScreen.routeName:
       return MaterialPageRoute(
-          builder: (_) => const AddProduct(), settings: routeSettings);
+          builder: (_) => const AddProductScreen(), settings: routeSettings);
 
     case AdminScreen.routeName:
       return MaterialPageRoute(
